@@ -1,0 +1,11 @@
+div#calendar {
+    padding-top: 50px;
+}
+
+span.event-container {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    span.event-container {display: none}
+}

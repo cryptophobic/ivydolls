@@ -1,0 +1,34 @@
+.carousel {
+    margin-top: 20px;
+}
+.item .thumb {
+    width: 20%;
+    cursor: pointer;
+    float: left;
+}
+.item .thumb img {
+    width: 100%;
+    margin: 2px;
+}
+.item img {
+    width: 100%;
+}
+.owl-carousel-container {
+    position: relative;
+}
+
+.owl-carousel-container a.next, .owl-carousel-container a.prev {
+    position: absolute;
+    top: 40%;
+    font-size: 20px;
+    z-index: 9000;
+    text-decoration: none;
+}
+.owl-carousel-container a.prev {
+    left: 0;
+    right: auto;
+}
+.owl-carousel-container a.next {
+     left: auto;
+     right: 0;
+}

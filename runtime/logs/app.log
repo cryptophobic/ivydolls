@@ -1,0 +1,185 @@
+2017-10-23 09:22:30 [-][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Call to a member function find() on null' in D:\Development\website\artsandolls\models\_system\ScrapLoongSoul.php:55
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2017-10-23 09:22:20 [-][-][-][info][application] $_SERVER = [
+    'LOCALAPPDATA' => 'C:\\Users\\dima\\AppData\\Local'
+    'PROCESSOR_LEVEL' => '6'
+    'FP_NO_HOST_CHECK' => 'NO'
+    'PROMPT' => '$P$G'
+    'VS140COMNTOOLS' => 'C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\'
+    'USERDOMAIN' => 'dima-PC'
+    'LOGONSERVER' => '\\\\DIMA-PC'
+    'SESSIONNAME' => 'Console'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\'
+    'SystemDrive' => 'C:'
+    'APPDATA' => 'C:\\Users\\dima\\AppData\\Roaming'
+    'MOZ_PLUGIN_PATH' => 'C:\\PROGRAM FILES (X86)\\FOXIT SOFTWARE\\FOXIT READER\\plugins\\'
+    'USERNAME' => 'dima'
+    'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;c:\\Program Files\\mingw-w64\\x86_64-5.1.0-posix-seh-rt_v4-rev0\\mingw64\\bin\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\wamp64\\bin\\php\\php5.6.16;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Yarn\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;c:\\Program Files\\mingw-w64\\x86_64-5.1.0-posix-seh-rt_v4-rev0\\mingw64\\bin\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\wamp64\\bin\\php\\php5.6.16;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Users\\dima\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\dima\\AppData\\Local\\Programs\\Python\\Python35\\;c:\\Program Files (x86)\\Android\\android-sdk\\platform-tools\\;C:\\Users\\dima\\AppData\\Roaming\\Composer\\vendor\\bin;c:\\MinGW\\bin\\;c:\\MinGW\\msys\\1.0\\;C:\\Users\\dima\\AppData\\Roaming\\npm;C:\\Users\\dima\\AppData\\Local\\Yarn\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PHP'
+    'OS' => 'Windows_NT'
+    'windows_tracing_flags' => '3'
+    'COMPUTERNAME' => 'DIMA-PC'
+    'PROCESSOR_REVISION' => '2a07'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramW6432' => 'C:\\Program Files'
+    'HOMEPATH' => '\\Users\\dima'
+    'SystemRoot' => 'C:\\Windows'
+    'TEMP' => 'C:\\Users\\dima\\AppData\\Local\\Temp'
+    'HOMEDRIVE' => 'C:'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 42 Stepping 7, GenuineIntel'
+    'USERPROFILE' => 'C:\\Users\\dima'
+    'TMP' => 'C:\\Users\\dima\\AppData\\Local\\Temp'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'ProgramFiles' => 'C:\\Program Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'NUMBER_OF_PROCESSORS' => '8'
+    'windir' => 'C:\\Windows'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1508750540.2144
+    'REQUEST_TIME' => 1508750540
+    'argv' => [
+        0 => 'yii'
+        1 => 'scrap/loong'
+    ]
+    'argc' => 2
+]
+2017-10-23 09:23:15 [-][-][-][error][yii\base\ErrorException:1] exception 'yii\base\ErrorException' with message 'Call to a member function find() on null' in D:\Development\website\artsandolls\models\_system\ScrapLoongSoul.php:56
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleFatalError()
+#1 {main}
+2017-10-23 09:23:07 [-][-][-][info][application] $_SERVER = [
+    'LOCALAPPDATA' => 'C:\\Users\\dima\\AppData\\Local'
+    'PROCESSOR_LEVEL' => '6'
+    'FP_NO_HOST_CHECK' => 'NO'
+    'PROMPT' => '$P$G'
+    'VS140COMNTOOLS' => 'C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\'
+    'USERDOMAIN' => 'dima-PC'
+    'LOGONSERVER' => '\\\\DIMA-PC'
+    'SESSIONNAME' => 'Console'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\'
+    'SystemDrive' => 'C:'
+    'APPDATA' => 'C:\\Users\\dima\\AppData\\Roaming'
+    'MOZ_PLUGIN_PATH' => 'C:\\PROGRAM FILES (X86)\\FOXIT SOFTWARE\\FOXIT READER\\plugins\\'
+    'USERNAME' => 'dima'
+    'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;c:\\Program Files\\mingw-w64\\x86_64-5.1.0-posix-seh-rt_v4-rev0\\mingw64\\bin\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\wamp64\\bin\\php\\php5.6.16;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Yarn\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;c:\\Program Files\\mingw-w64\\x86_64-5.1.0-posix-seh-rt_v4-rev0\\mingw64\\bin\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\wamp64\\bin\\php\\php5.6.16;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Users\\dima\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\dima\\AppData\\Local\\Programs\\Python\\Python35\\;c:\\Program Files (x86)\\Android\\android-sdk\\platform-tools\\;C:\\Users\\dima\\AppData\\Roaming\\Composer\\vendor\\bin;c:\\MinGW\\bin\\;c:\\MinGW\\msys\\1.0\\;C:\\Users\\dima\\AppData\\Roaming\\npm;C:\\Users\\dima\\AppData\\Local\\Yarn\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PHP'
+    'OS' => 'Windows_NT'
+    'windows_tracing_flags' => '3'
+    'COMPUTERNAME' => 'DIMA-PC'
+    'PROCESSOR_REVISION' => '2a07'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramW6432' => 'C:\\Program Files'
+    'HOMEPATH' => '\\Users\\dima'
+    'SystemRoot' => 'C:\\Windows'
+    'TEMP' => 'C:\\Users\\dima\\AppData\\Local\\Temp'
+    'HOMEDRIVE' => 'C:'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 42 Stepping 7, GenuineIntel'
+    'USERPROFILE' => 'C:\\Users\\dima'
+    'TMP' => 'C:\\Users\\dima\\AppData\\Local\\Temp'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'ProgramFiles' => 'C:\\Program Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'NUMBER_OF_PROCESSORS' => '8'
+    'windir' => 'C:\\Windows'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1508750587.6761
+    'REQUEST_TIME' => 1508750587
+    'argv' => [
+        0 => 'yii'
+        1 => 'scrap/loong'
+    ]
+    'argc' => 2
+]
+2017-10-23 09:24:32 [-][-][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined offset: 0' in D:\Development\website\artsandolls\models\_system\ScrapLoongSoul.php:56
+Stack trace:
+#0 D:\Development\website\artsandolls\models\_system\ScrapLoongSoul.php(56): yii\base\ErrorHandler->handleError(8, 'Undefined offse...', 'D:\\Development\\...', 56, Array)
+#1 D:\Development\website\artsandolls\models\_system\ScrapLoongSoul.php(38): app\models\_system\ScrapLoongSoul->productPage('http://www.ls-d...')
+#2 D:\Development\website\artsandolls\commands\ScrapController.php(27): app\models\_system\ScrapLoongSoul->start()
+#3 [internal function]: app\commands\ScrapController->actionLoong()
+#4 D:\Development\website\artsandolls\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array(Array, Array)
+#5 D:\Development\website\artsandolls\vendor\yiisoft\yii2\base\Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#6 D:\Development\website\artsandolls\vendor\yiisoft\yii2\console\Controller.php(128): yii\base\Controller->runAction('loong', Array)
+#7 D:\Development\website\artsandolls\vendor\yiisoft\yii2\base\Module.php(523): yii\console\Controller->runAction('loong', Array)
+#8 D:\Development\website\artsandolls\vendor\yiisoft\yii2\console\Application.php(180): yii\base\Module->runAction('scrap/loong', Array)
+#9 D:\Development\website\artsandolls\vendor\yiisoft\yii2\console\Application.php(147): yii\console\Application->runAction('scrap/loong', Array)
+#10 D:\Development\website\artsandolls\vendor\yiisoft\yii2\base\Application.php(380): yii\console\Application->handleRequest(Object(yii\console\Request))
+#11 D:\Development\website\artsandolls\yii(20): yii\base\Application->run()
+#12 {main}
+2017-10-23 09:24:24 [-][-][-][info][application] $_SERVER = [
+    'LOCALAPPDATA' => 'C:\\Users\\dima\\AppData\\Local'
+    'PROCESSOR_LEVEL' => '6'
+    'FP_NO_HOST_CHECK' => 'NO'
+    'PROMPT' => '$P$G'
+    'VS140COMNTOOLS' => 'C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\'
+    'USERDOMAIN' => 'dima-PC'
+    'LOGONSERVER' => '\\\\DIMA-PC'
+    'SESSIONNAME' => 'Console'
+    'ALLUSERSPROFILE' => 'C:\\ProgramData'
+    'PROCESSOR_ARCHITECTURE' => 'AMD64'
+    'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\'
+    'SystemDrive' => 'C:'
+    'APPDATA' => 'C:\\Users\\dima\\AppData\\Roaming'
+    'MOZ_PLUGIN_PATH' => 'C:\\PROGRAM FILES (X86)\\FOXIT SOFTWARE\\FOXIT READER\\plugins\\'
+    'USERNAME' => 'dima'
+    'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log'
+    'ProgramFiles(x86)' => 'C:\\Program Files (x86)'
+    'CommonProgramFiles' => 'C:\\Program Files\\Common Files'
+    'Path' => 'C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;c:\\Program Files\\mingw-w64\\x86_64-5.1.0-posix-seh-rt_v4-rev0\\mingw64\\bin\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\wamp64\\bin\\php\\php5.6.16;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Yarn\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;c:\\Program Files\\mingw-w64\\x86_64-5.1.0-posix-seh-rt_v4-rev0\\mingw64\\bin\\;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\wamp64\\bin\\php\\php5.6.16;C:\\ProgramData\\ComposerSetup\\bin;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Users\\dima\\AppData\\Local\\Programs\\Python\\Python35\\Scripts\\;C:\\Users\\dima\\AppData\\Local\\Programs\\Python\\Python35\\;c:\\Program Files (x86)\\Android\\android-sdk\\platform-tools\\;C:\\Users\\dima\\AppData\\Roaming\\Composer\\vendor\\bin;c:\\MinGW\\bin\\;c:\\MinGW\\msys\\1.0\\;C:\\Users\\dima\\AppData\\Roaming\\npm;C:\\Users\\dima\\AppData\\Local\\Yarn\\bin'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PHP'
+    'OS' => 'Windows_NT'
+    'windows_tracing_flags' => '3'
+    'COMPUTERNAME' => 'DIMA-PC'
+    'PROCESSOR_REVISION' => '2a07'
+    'CommonProgramW6432' => 'C:\\Program Files\\Common Files'
+    'ComSpec' => 'C:\\Windows\\system32\\cmd.exe'
+    'ProgramData' => 'C:\\ProgramData'
+    'ProgramW6432' => 'C:\\Program Files'
+    'HOMEPATH' => '\\Users\\dima'
+    'SystemRoot' => 'C:\\Windows'
+    'TEMP' => 'C:\\Users\\dima\\AppData\\Local\\Temp'
+    'HOMEDRIVE' => 'C:'
+    'PROCESSOR_IDENTIFIER' => 'Intel64 Family 6 Model 42 Stepping 7, GenuineIntel'
+    'USERPROFILE' => 'C:\\Users\\dima'
+    'TMP' => 'C:\\Users\\dima\\AppData\\Local\\Temp'
+    'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files'
+    'ProgramFiles' => 'C:\\Program Files'
+    'PUBLIC' => 'C:\\Users\\Public'
+    'NUMBER_OF_PROCESSORS' => '8'
+    'windir' => 'C:\\Windows'
+    'PHP_SELF' => 'yii'
+    'SCRIPT_NAME' => 'yii'
+    'SCRIPT_FILENAME' => 'yii'
+    'PATH_TRANSLATED' => 'yii'
+    'DOCUMENT_ROOT' => ''
+    'REQUEST_TIME_FLOAT' => 1508750664.5875
+    'REQUEST_TIME' => 1508750664
+    'argv' => [
+        0 => 'yii'
+        1 => 'scrap/loong'
+    ]
+    'argc' => 2
+]

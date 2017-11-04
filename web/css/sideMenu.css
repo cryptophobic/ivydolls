@@ -1,0 +1,42 @@
+@media screen and (min-width: 768px) {
+    #masthead h1 {
+        font-size: 100px;
+    }
+}
+
+.navbar-bright {
+    background-color:#111155;
+    color:#fff;
+}
+
+.navbar-bright a, #masthead a, #masthead .lead {
+    color:#aaaacc;
+}
+
+#sidebar ul {
+    padding-left: 10px;
+}
+
+.navbar-bright li > a:hover {
+    background-color:#000033;
+}
+
+.affix-top,.affix{
+    position: static;
+}
+.affix {
+    top: 60px;
+}
+
+#sidebar-dolls li {
+    border-bottom:1px solid #eee;
+}
+
+#sidebar li.active {
+    border-right:5px solid #eee;
+}
+
+#mainCol h2 {
+    padding-top: 55px;
+    margin-top: -55px;
+}
