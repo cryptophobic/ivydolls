@@ -54,7 +54,9 @@ class ItemStore
                 $this->_dataPack->set($this->_pkName, $itemId);
             }
         }
-        return clone $this->_dataPack;
+        $dataPack = clone $this->_dataPack;
+        $dataPack->first();
+        return $dataPack;
     }
 
     /**

@@ -10,6 +10,7 @@ use yii\db\Query;
  * @package app\models\ProductsSpecs
  * @method ProductsSpecsPack getItems ($offset = 0)
  * @method ProductsSpecsPack getNext
+ * @method ProductsSpecsPack getAll
  */
 class ProductsSpecsCollection extends Collection
 {

@@ -41,7 +41,8 @@ class CategoryPack extends ItemsPack
     protected function isProperType($name, $value)
     {
         if(($name === 'options' && $value instanceof OptionsPack)
-            || ($name === 'specs' && $value instanceof SpecsPack)){
+            || ($name === 'specs' && $value instanceof SpecsPack)
+            || ($name === 'categories' && $value instanceof CategoryPack)){
             return parent::isProperType($name, $value);
         }
         return false;
@@ -54,6 +55,7 @@ class CategoryPack extends ItemsPack
     {
         $this->_references['options'] = new OptionsPack();
         $this->_references['specs'] = new SpecsPack();
+        $this->_references['categories'] = new CategoryPack();
         return parent::initializeReferences();
     }
 

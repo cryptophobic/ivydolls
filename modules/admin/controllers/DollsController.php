@@ -20,6 +20,7 @@ use app\models\ProductsImages\ProductsImagesEdit;
 use app\models\ProductsImages\ProductsImagesPack;
 use app\models\ProductsRelated\ProductsRelatedDelete;
 use app\models\ProductsRelated\ProductsRelatedPack;
+use app\models\Specs\Specs;
 use app\models\Specs\SpecsCollection;
 use Yii;
 
@@ -203,14 +204,60 @@ class DollsController extends AdminController
      */
     public function actionDoll($id)
     {
-        return $this->render('doll', [
-            'productPresentation' => new ProductPresentation($id)
-        ]);
+        $categories = new CategoryCollection();
+        $categories->setParentCategoryIds(-1);
+        $productPresentation = new ProductPresentation($id);
+
+        if($productPresentation->getExtraSpecs()->current() || $productPresentation->getExtraProductOptions()->current())
+        {
+            return $this->render('extra', [
+                'productPresentation' => $productPresentation,
+                'categories' => $categories->getAll()
+            ]);
+        } else {
+            return $this->render('doll', [
+                'categories' => $categories->getAll(),
+                'productPresentation' => $productPresentation
+            ]);
+        }
+    }
+
+    public function actionMove()
+    {
+        $productId = ObjFactory::request()->getBodyParam('product_id', 0);
+        $product = (new Products())->getItemsByIds(['product_id' => [$productId]]);
+
+        if (!$productId)
+        {
+            throw new \Exception("product_id is mandatory.". print_r(ObjFactory::request()->getBodyParams(), true));
+        }
+
+        if($newCategory = ObjFactory::request()->getBodyParam('newCategoryId', false))
+        {
+
+            $category = (new Categories())->getItemsByIds(['category_id' => [$newCategory]]);
+            if ($product->moveToItem(['product_id' => $productId]) && $category->moveToItem(['category_id' => $newCategory]))
+            {
+                $product->category_id = $category->category_id;
+                $product->flush();
+            }
+        } else {
+            $specsIds = ObjFactory::request()->getBodyParam('specs', []);
+            $optionsIds = ObjFactory::request()->getBodyParam('options', []);
+            $categoryId = ObjFactory::request()->getBodyParam('category_id', 0);
+            ProductsEdit::moveFeatures($optionsIds, $specsIds, $productId, $categoryId);
+        }
+
+        $params = array_merge(['/admin/dolls/doll'], ['id' => $productId]);
+        $this->redirect(ObjFactory::urlManager()->createUrl($params));
     }
 
     public function actionNew($categoryId)
     {
+        $categories = new Categories();
+
         return $this->render('doll', [
+            'categories' => $categories->getItemsByIds($categoryId),
             'productPresentation' => new ProductPresentation(0, $categoryId)
         ]);
     }

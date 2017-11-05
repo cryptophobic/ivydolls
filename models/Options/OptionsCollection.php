@@ -9,7 +9,7 @@ use yii\db\Query;
 /**
  * @method OptionsPack getItems ($offset = 0)
  * @method OptionsPack getNext ()
- *
+ * @method OptionsPack getAll ()
  * Class OptionsCollection
  * @package app\models\Options
  */
@@ -19,6 +19,11 @@ class OptionsCollection extends Collection
      * @var array
      */
     private $_categoryIds = [];
+
+    /**
+     * @var string
+     */
+    private $_name = '';
 
     /**
      * @param array|int $categoryIds
@@ -33,6 +38,15 @@ class OptionsCollection extends Collection
     }
 
     /**
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+
+    /**
      * @param Query $query
      * @return Query
      */
@@ -41,6 +55,10 @@ class OptionsCollection extends Collection
         if ($this->_keyword)
         {
             $query->andWhere('name like :keyword', [':keyword' => $this->_keyword.'%']);
+        }
+        if ($this->_name)
+        {
+            $query->andWhere('name = :name', [':name' => $this->_name]);
         }
         if ($this->_categoryIds)
         {

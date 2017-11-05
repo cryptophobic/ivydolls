@@ -31,7 +31,12 @@ class CategoryCollection extends Collection
      */
     public function setParentCategoryIds($parentCategoryIds)
     {
-        $this->_parentCategoryIds = (array)$parentCategoryIds;
+        if ($parentCategoryIds < 0)
+        {
+            $this->_parentCategoryIds = null;
+        } else {
+            $this->_parentCategoryIds = (array)$parentCategoryIds;
+        }
         return $this;
     }
 

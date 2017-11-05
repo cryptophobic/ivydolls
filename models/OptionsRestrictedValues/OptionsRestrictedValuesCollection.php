@@ -8,6 +8,7 @@ use yii\db\Query;
 /**
  * @method OptionsRestrictedValuesPack getItems ($offset = 0)
  * @method OptionsRestrictedValuesPack getNext ()
+ * @method OptionsRestrictedValuesPack getAll ()
  *
  * Class OptionsRestrictedValuesCollection
  */
@@ -17,6 +18,11 @@ class OptionsRestrictedValuesCollection extends Collection
      * @var array
      */
     private $_optionIds = [];
+
+    /**
+     * @var string
+     */
+    private $_name = '';
 
     /**
      * @param array|int $optionIds
@@ -31,6 +37,14 @@ class OptionsRestrictedValuesCollection extends Collection
     }
 
     /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
      * @param Query $query
      * @return Query
      */
@@ -39,6 +53,10 @@ class OptionsRestrictedValuesCollection extends Collection
         if ($this->_keyword)
         {
             $query->andWhere('value like :keyword', [':keyword' => $this->_keyword.'%']);
+        }
+        if ($this->_name)
+        {
+            $query->andWhere('value = :name', [':name' => $this->_name]);
         }
         if ($this->_optionIds)
         {

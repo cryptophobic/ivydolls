@@ -23,6 +23,7 @@ $this->registerJsFile('/kartik-v/bootstrap-fileinput/themes/fa/theme.js', ['posi
 
 /**
  * @var ProductPresentation $productPresentation
+ * @var CategoryPack $categories
  */
 
 $product = $productPresentation->getProduct();
@@ -36,14 +37,10 @@ $brands = $productPresentation->getBrands();
 <div class="container-fluid">
     <form method="post" id="upload" class="submitWarn" action="/admin/dolls/save" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
-        <input type="hidden" name="category_id" value="<?= $product->category_id ?>"/>
         <input type="hidden" name="product_id" value="<?= $product->product_id ?>"/>
         <input type="hidden" name="original_url" value="<?= $product->original_url ?>"/>
 
         <div class="row padding-bottom">
-            <input class="batch" data-target="images" id="imagesCheck" type="checkbox">&nbsp;<label for="imagesCheck">Выбрать
-                все изображения</label>
-
             <button type="submit" data-action="/admin/dolls/save" id="saveProduct" name="save" value="1"
                     class="right btn btn-primary">Применить изменения
             </button>
@@ -64,6 +61,9 @@ $brands = $productPresentation->getBrands();
             </div>
 
             <div id="images" class="collapse">
+                <input class="batch" data-target="images" id="imagesCheck" type="checkbox">&nbsp;<label for="imagesCheck">Выбрать
+                    все изображения</label>
+
 
                 <div class="row">
                     <?php
@@ -113,25 +113,20 @@ $brands = $productPresentation->getBrands();
         <div id="general" class="collapse in">
 
             <div class="form_group">
-                <label>Категория: <?= $product->categories->name ?></label>
-                <select name="brand_id" class="required selectpicker">
-                    <option value=""></option>
+                <label for="category_id">Категория:</label>
+                <select id="category_id" name="category_id" class="required selectpicker">
                     <?php
-                    for ($brands->first(); $brands->current(); $brands->next()) {
+                    for ($categories->first(); $categories->current(); $categories->next()) {
                         ?>
-                        <option value="<?= $brands->brand_id ?>"
-                                <?php if ($product->brand_id == $brands->brand_id){ ?>selected<?php } ?>>
-                            <?= $brands->name ?></option>
+                        <option value="<?= $categories->category_id ?>"
+                                <?php if ($product->category_id == $categories->category_id){ ?>selected<?php } ?>>
+                            <?= $categories->name ?></option>
                         <?php
                     }
                     ?>
                 </select>
-            </div>
-
-
-            <div class="form-group">
-                <label for="inputName">Бренд:</label>
-                <select name="brand_id" class="required selectpicker">
+                <label for="brand_id">Бренд:</label>
+                <select id="brand_id" name="brand_id" class="required selectpicker">
                     <option value=""></option>
                     <?php
                     for ($brands->first(); $brands->current(); $brands->next()) {

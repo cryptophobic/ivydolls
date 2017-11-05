@@ -16,6 +16,7 @@ use app\models\Abstractive\Complex\ItemsPack;
  * @property integer spec_id
  * @property integer specs_restricted_values_id
  * @property string value
+ * @method SpecsRestrictedValuesPack flush
  */
 class SpecsRestrictedValuesPack extends ItemsPack
 {

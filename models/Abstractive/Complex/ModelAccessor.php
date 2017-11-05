@@ -9,6 +9,7 @@
 namespace app\models\Abstractive\Complex;
 
 
+use app\models\Category\Categories;
 use app\models\ObjFactory;
 use app\models\ProductsImages\ProductsImagesPack;
 use yii\db\Query;

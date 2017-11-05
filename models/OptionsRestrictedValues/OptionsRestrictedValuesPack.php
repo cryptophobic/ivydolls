@@ -18,6 +18,7 @@ use app\models\Abstractive\Complex\ItemsPack;
  * @property string $original_value
  * @property int $option_id
  * @property float $price
+ * @method OptionsRestrictedValuesPack flush
  */
 class OptionsRestrictedValuesPack extends ItemsPack
 {

@@ -13,9 +13,12 @@ use app\models\Brands\BrandsCollection;
 use app\models\Brands\BrandsPack;
 use app\models\Category\Categories;
 use app\models\Category\CategoryPack;
+use app\models\Options\Options;
 use app\models\Options\OptionsCollection;
 use app\models\Options\OptionsPack;
+use app\models\ProductsOptions\ProductsOptionsPack;
 use app\models\ProductsRelated\ProductsRelatedPack;
+use app\models\ProductsSpecs\ProductsSpecsPack;
 use app\models\Specs\SpecsCollection;
 use app\models\Specs\SpecsPack;
 
@@ -44,6 +47,21 @@ class ProductPresentation
      * @var OptionsPack
      */
     private $_options = null;
+
+    /**
+     * @var ProductsSpecsPack
+     */
+    private $_extraSpecs = null;
+
+    /**
+     * @var ProductsOptionsPack
+     */
+    private $_extraProductOptions = null;
+
+    /**
+     * @var OptionsPack
+     */
+    private $_extraOptions = null;
 
     /**
      * @var BrandsPack
@@ -100,6 +118,73 @@ class ProductPresentation
             $this->_options = $options->getAll();
         }
         return $this->_options;
+    }
+
+    /**
+     * @return ProductsOptionsPack
+     */
+    public function getExtraProductOptions()
+    {
+        if ($this->_extraProductOptions === null)
+        {
+            $this->_extraProductOptions = new ProductsOptionsPack();
+            $product = $this->getProduct();
+            $productOptions = $product->products_options;
+            $correctOptions = $this->getOptions();
+            $optionIds = [];
+            for ($productOptions->first(); $productOptions->current(); $productOptions->next())
+            {
+                if (!$correctOptions->moveToItem(['option_id' => $productOptions->option_id]))
+                {
+                    $this->_extraProductOptions->newItem($productOptions)->addItem();
+                    $optionIds[$productOptions->option_id] = $productOptions->option_id;
+                }
+            }
+            if (!empty($optionIds)) {
+                $options = new Options();
+                $this->_extraOptions = $options->getItemsByIds(['option_id' => $optionIds]);
+            }
+        }
+
+        return $this->_extraProductOptions;
+    }
+
+    /**
+     * @return OptionsPack
+     */
+    public function getExtraOptions()
+    {
+        if ($this->_extraOptions === null)
+        {
+            $this->getExtraProductOptions();
+        }
+        if ($this->_extraOptions === null)
+        {
+            $this->_extraOptions = new OptionsPack();
+        }
+        return $this->_extraOptions;
+    }
+
+    /**
+     * @return ProductsSpecsPack
+     */
+    public function getExtraSpecs()
+    {
+        if ($this->_extraSpecs === null)
+        {
+            $this->_extraSpecs = new ProductsSpecsPack();
+            $product = $this->getProduct();
+            $productSpecs = $product->products_specs;
+            for ($productSpecs->first(); $productSpecs->current(); $productSpecs->next())
+            {
+                if ($productSpecs->specs->category_id !== $product->category_id)
+                {
+                    $this->_extraSpecs->newItem($productSpecs)->addItem();
+                }
+            }
+        }
+
+        return $this->_extraSpecs;
     }
 
     /**

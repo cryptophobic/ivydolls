@@ -5,12 +5,19 @@ namespace app\models\Specs;
 use app\models\Abstractive\Complex\Collection;
 use yii\db\Query;
 
+/**
+ * Class SpecsCollection
+ * @package app\models\Specs
+ * @method SpecsPack getAll
+ */
 class SpecsCollection extends Collection
 {
     /**
      * @var array
      */
     private $_categoryIds = [];
+
+    private $_name = '';
 
     /**
      * @param array|int $categoryIds
@@ -25,6 +32,14 @@ class SpecsCollection extends Collection
     }
 
     /**
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
      * @param Query $query
      * @return Query
      */
@@ -33,6 +48,10 @@ class SpecsCollection extends Collection
         if ($this->_keyword)
         {
             $query->andWhere('name like :keyword', [':keyword' => $this->_keyword.'%']);
+        }
+        if ($this->_name)
+        {
+            $query->andWhere('name = :name', [':name' => $this->_name]);
         }
         if ($this->_categoryIds)
         {

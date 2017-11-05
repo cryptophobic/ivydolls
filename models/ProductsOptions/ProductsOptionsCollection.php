@@ -9,6 +9,7 @@ use yii\db\Query;
  * Class ProductsOptionsCollection
  * @package app\models\ProductsOptions
  * @method ProductsOptionsPack getItems ($offset = 0)
+ * @method ProductsOptionsPack getAll
  */
 class ProductsOptionsCollection extends Collection
 {

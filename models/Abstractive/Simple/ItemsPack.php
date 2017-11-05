@@ -8,6 +8,7 @@
 
 namespace app\models\Abstractive\Simple;
 use app\models\Options\OptionsPack;
+use app\models\OptionsRestrictedValues\OptionsRestrictedValuesPack;
 
 /**
  * Class ItemsPack

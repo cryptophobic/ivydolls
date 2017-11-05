@@ -32,7 +32,9 @@ class ItemStore extends \app\models\Abstractive\Simple\ItemStore
                 $this->_dataPack->set($this->_pkName[0], $id);
             }
         }
-        return clone $this->_dataPack;
+        $dataPack = clone $this->_dataPack;
+        $dataPack->first();
+        return $dataPack;
     }
 
     /**
