@@ -61,10 +61,12 @@ class DollsController extends AdminController
         }
 
         $categoriesCollection = new CategoryCollection();
+        $categoriesCollection->setParentCategoryIds(-1);
+        $categoriesCollection->getModel()->loadCategoryHierarchy();
         $categories = $categoriesCollection->getAll();
 
-        $categories->moveToItem(['category_id' => $categoryId]);
-        $categories->select();
+        //$categories->moveToItem(['category_id' => $categoryId]);
+        //$categories->select();
 
         $brandsCollection = new BrandsCollection();
         $brands = $brandsCollection->getItems();
@@ -111,6 +113,7 @@ class DollsController extends AdminController
             'selectedHeight' => $height,
             'keyword' => $keyword,
             'categories' => $categories,
+            'categoryId' => $categoryId,
             'brands' => $brands,
             'items' => $dolls,
             'nextUrl' => $nextUrl,

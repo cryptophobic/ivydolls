@@ -30,7 +30,7 @@ class CategoryController extends AdminController
         $parentParentCategoryId = 0;
         if ($parentCategoryId > 0) {
             $categories = new Categories();
-            $categoryPack = $categories->getItemsByIds($parentCategoryId);
+            $categoryPack = $categories->getItemsByIds(['category_id' => $parentCategoryId]);
             $parentParentCategoryId = $categoryPack->parent_category_id;
         }
         $collection = new CategoryCollection();

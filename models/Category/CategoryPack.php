@@ -22,6 +22,7 @@ use app\models\Specs\SpecsPack;
  * @property integer parent_category_id
  * @property integer category_id
  * @property integer active
+ * @property CategoryPack $categories
  * @property OptionsPack options
  * @property SpecsPack specs
  * @method CategoryPack flush

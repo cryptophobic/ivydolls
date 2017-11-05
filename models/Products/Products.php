@@ -70,7 +70,7 @@ class Products extends ModelAccessor
         {
             $productsImagesCollection = new ProductsImagesCollection();
             $productsImagesCollection->setProductIds($this->_ids['product_id']);
-            $this->_mergeDataPack($productsImagesCollection->getAll(), ProductsImagesPack::getTableName());
+            $this->_items->mergeDataPack($productsImagesCollection->getAll(), ProductsImagesPack::getTableName());
             return true;
         } else {
             return false;
@@ -89,7 +89,7 @@ class Products extends ModelAccessor
             $specsCollection = new ProductsSpecsCollection();
             $specsCollection->getModel()->loadSpecInfo();
             $specsCollection->setProductIds($this->_ids['product_id']);
-            $this->_mergeDataPack($specsCollection->getAll(), ProductsSpecsPack::getTableName());
+            $this->_items->mergeDataPack($specsCollection->getAll(), ProductsSpecsPack::getTableName());
             return true;
         } else {
             return false;
@@ -107,7 +107,7 @@ class Products extends ModelAccessor
         {
             $optionsCollection = new ProductsOptionsCollection();
             $optionsCollection->setProductIds($this->_ids['product_id']);
-            $this->_mergeDataPack($optionsCollection->getAll(), ProductsOptionsPack::getTableName());
+            $this->_items->mergeDataPack($optionsCollection->getAll(), ProductsOptionsPack::getTableName());
 
             return true;
         } else {
@@ -128,7 +128,7 @@ class Products extends ModelAccessor
             if (!empty($ids))
             {
                 $items = $brands->getItemsByIds(['brand_id' => $ids]);
-                $this->_mergeDataPack($items, BrandsPack::getTableName());
+                $this->_items->mergeDataPack($items, BrandsPack::getTableName());
             }
 
             return true;
@@ -149,8 +149,8 @@ class Products extends ModelAccessor
             }
             if (!empty($ids))
             {
-                $items = $categories->getItemsByIds($ids);
-                $this->_mergeDataPack($items, CategoryPack::getTableName());
+                $items = $categories->getItemsByIds(['category_id' => $ids]);
+                $this->_items->mergeDataPack($items, CategoryPack::getTableName());
             }
 
             return true;
@@ -166,7 +166,7 @@ class Products extends ModelAccessor
             $relatedCollection = new ProductsRelatedCollection();
             $relatedCollection->getModel()->loadProductInfo();
             $relatedCollection->setProductIds($this->_ids['product_id']);
-            $this->_mergeDataPack($relatedCollection->getAll(), ProductsRelatedPack::getTableName());
+            $this->_items->mergeDataPack($relatedCollection->getAll(), ProductsRelatedPack::getTableName());
             return true;
         } else {
             return false;

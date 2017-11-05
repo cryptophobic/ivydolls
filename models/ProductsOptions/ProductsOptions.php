@@ -36,7 +36,7 @@ class ProductsOptions extends ModelAccessor
             $options = new Options();
             $options->loadRestrictedValues();
             $items = $options->getItemsByIds($this->_ids['option_id']);
-            $this->_mergeDataPack($items, 'options');
+            $this->_items->mergeDataPack($items, 'options');
 
             return true;
         } else {

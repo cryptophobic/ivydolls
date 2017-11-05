@@ -131,7 +131,24 @@ $this->registerJsFile('/js/start.js');
                             </ul>
                             <?php
                         }
-                        else
+                        elseif ($categories->categories->first())
+                        {
+                            ?>
+                            <a href="/#sidebar-<?= $categories->category_id ?>" data-toggle="collapse" data-parent="#sidebar"><?= $categories->name ?></a>
+                            <ul class="nav collapse" id="sidebar-<?= $categories->category_id ?>">
+                                <?
+                                $children = $categories->categories;
+                                for ($children->first();$children->current();$children->next()) {
+                                    ?>
+                                    <li><a class="sidebar-items" href="/start/load-products?categoryId=<?= $children->category_id ?>"><?= $children->name ?></a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+
+                            <?php
+                        } else
                         {
                             ?>
                             <a

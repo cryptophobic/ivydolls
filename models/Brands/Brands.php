@@ -43,7 +43,7 @@ class Brands extends ModelAccessor
                 $products->merge($productsPack);
             }
 
-            $this->_mergeDataPack($products, ProductsPack::getTableName());
+            $this->_items->mergeDataPack($products, ProductsPack::getTableName());
             return true;
         } else {
             return false;

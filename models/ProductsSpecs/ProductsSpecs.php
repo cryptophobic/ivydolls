@@ -37,8 +37,8 @@ class ProductsSpecs extends ModelAccessor
         {
             $specs = new Specs();
             $specs->loadRestrictedValues();
-            $items = $specs->getItemsByIds($this->_ids['spec_id']);
-            $this->_mergeDataPack($items, 'specs');
+            $items = $specs->getItemsByIds(['spec_id' => $this->_ids['spec_id']]);
+            $this->_items->mergeDataPack($items, 'specs');
             return true;
         } else {
             return false;

@@ -43,7 +43,7 @@ class Users extends ModelAccessor
         {
             $favouritesCollection = new FavouritesCollection();
             $favouritesCollection->setUserIds($this->_ids['user_id']);
-            $this->_mergeDataPack($favouritesCollection->getAll(), FavouritesPack::getTableName());
+            $this->_items->mergeDataPack($favouritesCollection->getAll(), FavouritesPack::getTableName());
             return true;
         } else {
             return false;
@@ -61,7 +61,7 @@ class Users extends ModelAccessor
         {
             $ordersCollection = new OrdersCollection();
             $ordersCollection->setUserIds($this->_ids['user_id']);
-            $this->_mergeDataPack($ordersCollection->getAll(), OrdersPack::getTableName());
+            $this->_items->mergeDataPack($ordersCollection->getAll(), OrdersPack::getTableName());
             return true;
         } else {
             return false;

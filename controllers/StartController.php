@@ -13,7 +13,9 @@ class StartController extends FOController
     public function actionIndex($scrollUrl = '')
     {
         $categoriesCollection = new CategoryCollection();
-        $categories = $categoriesCollection->getItems();
+        $categoriesCollection->setParentCategoryIds(-1);
+        $categoriesCollection->getModel()->loadCategoryHierarchy();
+        $categories = $categoriesCollection->getAll();
 
         $scrollUrl = str_replace('offset', '', $scrollUrl);
 

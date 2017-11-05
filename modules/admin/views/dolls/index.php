@@ -14,9 +14,10 @@ $this->registerJsFile('/bootstrap-select/js/bootstrap-select.min.js',['position'
  * @var CategoryPack $categories
  * @var BrandsPack $brands
  * @var int $selectedHeight
+ * @var int $categoryId
  */
 
-$categoryId = $categories->selected()->category_id !== null ? $categories->selected()->category_id : 1;
+//$categoryId = $categories->selected()->category_id !== null ? $categories->selected()->category_id : 1;
 
 ?>
 
@@ -45,10 +46,29 @@ $categoryId = $categories->selected()->category_id !== null ? $categories->selec
                 <?php
                 for ($categories->first(); $categories->current(); $categories->next())
                 {
-                    ?>
-                    <option value="<?= $categories->category_id ?>" <?php if ($categories->selected()->category_id == $categories->category_id){?>selected<?php }?>>
-                        <?= $categories->name ?></option>
-                    <?php
+                    if ($categories->categories->first())
+                    {
+                        ?>
+                        <optgroup label="<?= $categories->name ?>">
+                            <?php
+                            $children = $categories->categories;
+                        for ($children->first(); $children->current(); $children->next()) {
+                            ?>
+                            <option value="<?= $children->category_id ?>" <?php if ($children->category_id == $categoryId){?>selected<?php }?>>
+                                <?= $children->name ?></option>
+                            <?php
+                        }
+                            ?>
+                        </optgroup>
+                        <?
+                    } else {
+                        ?>
+
+                        <option value="<?= $categories->category_id ?>"
+                                <?php if ($categories->category_id == $categoryId){ ?>selected<?php } ?>>
+                            <?= $categories->name ?></option>
+                        <?php
+                    }
                 }
                 ?>
             </select>

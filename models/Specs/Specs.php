@@ -46,7 +46,7 @@ class Specs extends ModelAccessor
                 ->where(['IN', 'spec_id', $this->_ids['spec_id']])
                 ->createCommand(ObjFactory::dbConnection())->queryAll();
 
-            $this->_mergeData($restrictedValues, 'specs_restricted_values');
+            $this->_items->mergeData($restrictedValues, 'specs_restricted_values');
             return true;
         } else {
             return false;

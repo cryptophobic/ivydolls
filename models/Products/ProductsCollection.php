@@ -182,7 +182,7 @@ class ProductsCollection extends Collection
         $this->_offset += $this->_limit;
         $dolls = $this->getModel();
 
-        $items = $dolls->loadImages()->loadSpecs()->getItemsByIds($result);
+        $items = $dolls->loadImages()->loadSpecs()->getItemsByIds(['product_id' => $result]);
 
         return $items;
     }

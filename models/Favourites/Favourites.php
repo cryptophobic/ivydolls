@@ -50,7 +50,7 @@ class Favourites extends ModelAccessor
             if (!empty($ids))
             {
                 $items = $products->getItemsByIds(['product_id' => $ids]);
-                $this->_mergeDataPack($items, ProductsPack::getTableName());
+                $this->_items->mergeDataPack($items, ProductsPack::getTableName());
             }
             return true;
         } else {
@@ -76,7 +76,7 @@ class Favourites extends ModelAccessor
             if (!empty($ids))
             {
                 $items = $products->getItemsByIds(['user_id' => $ids]);
-                $this->_mergeDataPack($items, UsersPack::getTableName());
+                $this->_items->mergeDataPack($items, UsersPack::getTableName());
             }
             return true;
         } else {

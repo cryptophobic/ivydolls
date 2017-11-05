@@ -40,7 +40,7 @@ class Options extends ModelAccessor
         {
             $optionsRestrictedValuesCollection = new OptionsRestrictedValuesCollection();
             $optionsRestrictedValuesCollection->setOptionIds($this->_ids['option_id']);
-            $this->_mergeDataPack($optionsRestrictedValuesCollection->getAll(), 'options_restricted_values');
+            $this->_items->mergeDataPack($optionsRestrictedValuesCollection->getAll(), 'options_restricted_values');
             return true;
         } else {
             return false;

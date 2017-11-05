@@ -50,7 +50,7 @@ class OptionsGroups extends ModelAccessor
             {
                 $options->merge($optionsPack);
             }
-            $this->_mergeDataPack($options, 'options');
+            $this->_items->mergeDataPack($options, 'options');
             return true;
         } else {
             return false;

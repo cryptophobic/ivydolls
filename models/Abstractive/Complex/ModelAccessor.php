@@ -9,165 +9,114 @@
 namespace app\models\Abstractive\Complex;
 
 
-use app\models\Category\Categories;
 use app\models\ObjFactory;
-use app\models\ProductsImages\ProductsImagesPack;
 use yii\db\Query;
 
-abstract class ModelAccessor extends \app\models\Abstractive\Simple\ModelAccessor
+abstract class ModelAccessor
 {
-    /**
-     * @param array $data
-     * @param string $mergedKey
-     */
-    protected function _mergeData(array $data, $mergedKey = '')
-    {
-        foreach ($data as $item) {
-            $idName = $this->getIdName();
-            if (!is_array($idName))
-            {
-                $idName = [$idName];
-            }
 
-            $id = [];
-            foreach ($idName as $key) {
-                if (!empty($item[$key])) {
-                    $id[$key] = $item[$key];
-                }
-            }
-
-            if ($mergedKey == '') {
-                if (!$this->_items->moveToItem($id)) {
-                    $this->_items->newItem();
-                }
-                $this->_items->setBatch($item)->addItem();
-            } elseif (count($id) == 1) {
-                reset($id);
-                $key = key($id);
-                $value = $id[$key];
-                if ($this->_items->filter($key, $value)) {
-                    for ($this->_items->first(); $this->_items->current(); $this->_items->next()) {
-                        $dataPack = $this->_items->get($mergedKey);
-                        if ($dataPack instanceof ItemsPack) {
-                            $dataPack->newItem()->setBatch($item)->addItem();
-                        }
-                    }
-                }
-                $this->_items->filterClear();
-                $this->_items->first();
-            }
-        }
-    }
-
+    protected $_loaded = [];
 
     /**
-     * @param ItemsPack $data
-     * @param string $mergedKey
-     * @param array $keyMap
+     * @var \app\models\Abstractive\Complex\ItemsPack
      */
-    protected function _mergeDataPack($data, $mergedKey = '', $keyMap = [])
+    protected $_items = null;
+
+    protected $_options = [];
+
+    protected $_ids = [];
+
+    public function getIdName()
     {
-        for ($data->first(); $data->current(); $data->next()) {
-
-            if ($mergedKey == '') {
-                $id = $data->getCurrentKey();
-                if (!$this->_items->moveToItem($id)) {
-                    $this->_items->newItem();
-                }
-                $this->_items->setBatch($data->data())->addItem();
-            } else {
-
-                $idName = (array)$this->getIdName();
-                $fieldNames = (array)$data->getFieldNames();
-
-                $fieldNames = $this->_mapKeys($keyMap, $fieldNames);
-
-                $mergeKeys = array_intersect($idName, $fieldNames);
-                $mergeKeys = array_values($mergeKeys);
-                if (count($mergeKeys) == 0) {
-                    $this->_mergeNotIndexedData($data, $mergedKey, $keyMap);
-                } elseif (count($mergeKeys) == 1) {
-                    $this->_mergeIndexedData($data, $mergedKey, $mergeKeys, $keyMap);
-                }
-            }
-        }
+        return $this->_items->getPrimaryKey();
     }
 
-    private function _mapKeys($keyMap, $fieldNames)
+    public function getTableName()
     {
-        if (!empty($keyMap))
+        return $this->_items->getTableName();
+    }
+
+    public final function __construct()
+    {
+        $this->initialize();
+        if ($this->_items == null)
         {
-            foreach ($fieldNames as $index => $key)
-            {
-                $fieldNames[$index] = $this->_mapKey($keyMap, $key);
-            }
+            throw new \Exception("_items not initialized");
         }
-        return $fieldNames;
     }
 
-    private function _mapKey($keyMap, $key)
+    /**
+     * @return mixed
+     */
+    protected abstract function initialize();
+
+    /**
+     * @param $name
+     * @param $arguments
+     * @return $this
+     * @throws \Exception
+     */
+    public function __call($name, $arguments)
     {
-        if (!empty($keyMap[$key]))
+        if (key_exists('_'.$name, $this->_options))
         {
-            return $keyMap[$key];
+            $this->_options['_'.$name] = count($arguments) == 1?$arguments[0]:true;
+            return $this;
         }
-        return $key;
-    }
-
-    private function _unmapKey($keyMap, $key)
-    {
-        $keyMap = array_flip($keyMap);
-        return $this->_mapKey($keyMap, $key);
+        throw new \Exception("method $name is not implemented");
     }
 
     /**
-     * @param ItemsPack $data
-     * @param $mergedKey
-     * @param $mergeKeys
-     * @param $keyMap
+     * @param $entity
+     * @return bool
      */
-    private function _mergeIndexedData($data, $mergedKey, $mergeKeys, $keyMap)
+    protected function load($entity)
     {
-        $key = $mergeKeys[0];
-        $value = $data->get($this->_unmapKey($keyMap, $key));
-
-        if ($this->_items->filter($key, $value)) {
-            for ($this->_items->first(); $this->_items->current(); $this->_items->next()) {
-                $dataPack = $this->_items->get($mergedKey);
-                if ($dataPack instanceof \app\models\Abstractive\Simple\ItemsPack) {
-                    $dataPack->newItem($data)->addItem();
-                }
+        // because it is not possible to call isset for const
+        $result = false;
+        if (!$this->isLoaded($entity)) {
+            if (method_exists($this, $entity)) {
+                $result = $this->$entity();
+                $this->_loaded[$entity] = true;
             }
         }
-        $this->_items->filterClear();
-        $this->_items->first();
+        return $result;
     }
 
     /**
-     * @param ItemsPack $data
-     * @param $mergedKey
+     * @param $entity
+     * @return bool
      */
-    private function _mergeNotIndexedData($data, $mergedKey, $keyMap)
+    protected function isLoaded($entity)
     {
-        $fieldNames = (array)$data::getPrimaryKey();
-        $fieldNames = $this->_mapKeys($keyMap, $fieldNames);
-        $idName = (array)$this->_items->getFieldNames();
-        $mergeKeys = array_intersect($idName, $fieldNames);
-        $mergeKeys = array_values($mergeKeys);
-        if (count($mergeKeys) == 1) {
+        return !empty($this->_loaded[$entity]);
+    }
 
-            $key = $mergeKeys[0];
-            $value = $data->get($this->_unmapKey($keyMap, $key));
 
-            for ($this->_items->first(); $this->_items->current(); $this->_items->next()) {
-                if ($this->_items->get($key) === $value) {
-                    $dataPack = $this->_items->get($mergedKey);
-                    if ($dataPack instanceof \app\models\Abstractive\Simple\ItemsPack) {
-                        $dataPack->newItem($data)->addItem();
-                    }
-                }
+    /**
+     * @return array
+     */
+    protected function _loadFromDb()
+    {
+        $data = [];
+        if (!empty($this->_ids)) {
+            $className = get_class($this->_items);
+            $key = $className::getPrimaryKey();
+            if (!is_array($key)) {
+                $key = [$key];
             }
+            $query = new Query();
+            $query->select($this->_items->getFieldNames())
+                ->from($className::getTableName());
+            foreach ($key as $keyPart) {
+                $query->andWhere(["IN", $keyPart, $this->_ids[$keyPart]]);
+            }
+
+            $query = $this->orderBy($query);
+
+            $data = $query->createCommand(ObjFactory::dbConnection())->queryAll();
         }
+        return $data;
     }
 
     /**
@@ -177,27 +126,9 @@ abstract class ModelAccessor extends \app\models\Abstractive\Simple\ModelAccesso
      */
     protected function _loadGeneralInfo()
     {
-        if (!empty($this->_ids))
+        if ($data = $this->_loadFromDb())
         {
-            $className = get_class($this->_items);
-            $key = $className::getPrimaryKey();
-            if (!is_array($key))
-            {
-                $key = [$key];
-            }
-            $query = new Query();
-            $query->select($this->_items->getFieldNames())
-                ->from($className::getTableName());
-            foreach ($key as $keyPart)
-            {
-                $query->andWhere(["IN", $keyPart, $this->_ids[$keyPart]]);
-            }
-
-            $query = $this->orderBy($query);
-
-            $data = $query->createCommand(ObjFactory::dbConnection())->queryAll();
-            $this->_mergeData($data);
-
+            $this->_items->mergeData($data);
             return true;
         } else {
             return false;
@@ -210,17 +141,32 @@ abstract class ModelAccessor extends \app\models\Abstractive\Simple\ModelAccesso
      */
     public function getItemsByIds($ids)
     {
-        if (!empty($ids[0]))
+        $this->_ids = (array)$ids;
+        $this->_items->clear();
+        $this->_loadGeneralInfo();
+
+        foreach ($this->_options as $option => $set)
         {
-            $className = get_class($this->_items);
-            /** @var array $key */
-            $key = $className::getPrimaryKey();
-            $ids = [$key[0] => $ids];
+            if ($set === true)
+            {
+                $this->load($option);
+            }
         }
 
-        $res = parent::getItemsByIds($ids);
+        $this->_items->first();
 
-        return $res;
+        return $this->_items;
     }
+
+    /**
+     * @param Query $query
+     * @return Query
+     */
+    public function orderBy($query)
+    {
+        $query->orderBy("updated desc");
+        return $query;
+    }
+
 
 }

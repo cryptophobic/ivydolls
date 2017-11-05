@@ -36,7 +36,7 @@ class ProductsRelated extends ModelAccessor
             $products = new Products();
             $products->loadImages();
             $items = $products->getItemsByIds(['product_id' => $this->_ids['product_related_id']]);
-            $this->_mergeDataPack($items, 'products', ['product_id' => 'product_related_id']);
+            $this->_items->mergeDataPack($items, 'products', ['product_id' => 'product_related_id']);
 
             return true;
         } else {

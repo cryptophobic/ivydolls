@@ -49,7 +49,7 @@ class Session extends ModelAccessor
             if (!empty($ids))
             {
                 $items = $users->getItemsByIds(['user_id' => $ids]);
-                $this->_mergeDataPack($items, UsersPack::getTableName());
+                $this->_items->mergeDataPack($items, UsersPack::getTableName());
             }
             return true;
         } else {
