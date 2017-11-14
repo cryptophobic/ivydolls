@@ -66,7 +66,9 @@ class ProductsSearch
             }
 
             $this->_products = $this->_productCollection->getItems($this->_offset);
-            $this->_newOffset = $this->_productCollection->getOffset();
+            if($this->_products->current()) {
+                $this->_newOffset = $this->_productCollection->getOffset();
+            }
         }
     }
 
@@ -137,7 +139,7 @@ class ProductsSearch
 
     public function getScrollUrl()
     {
-        if (empty($this->_scrollUrl) && $this->getProducts()->current() && $this->_newOffset)
+        if (empty($this->_scrollUrl) && $this->getProducts() && $this->_newOffset)
         {
             $this->_scrollUrl = ObjFactory::urlManager()->createUrl([
                 'start/load-products',
