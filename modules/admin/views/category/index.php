@@ -9,6 +9,7 @@ use yii\web\View;
  */
 
 $this->registerJsFile('/js/admin/common.js',['position' => static::POS_END]);
+$this->registerJsFile('/js/admin/dragndrop.js',['position' => static::POS_END]);
 $this->registerCssFile('/bootstrap-select/css/bootstrap-select.min.css', ['position' => static::POS_END]);
 $this->registerJsFile('/bootstrap-select/js/bootstrap-select.min.js', ['position' => static::POS_END]);
 
@@ -20,7 +21,7 @@ $this->registerJsFile('/bootstrap-select/js/bootstrap-select.min.js', ['position
     <div class="row">
         <a href="/admin/category/category?parentCategoryId=<?= $parentCategoryId ?>" type="button" class="btn btn-primary">Новая категория</a>
         <button type="submit" id="deleteCategory" class="btn btn-primary">Удалить</button>
-        <select id="filter2" name="parentCategoryId" data-action="/admin/category/index"  class="submitiative selectpicker">
+        <select id="filter2" name="parentCategoryId" data-method="GET" data-action="/admin/category/index"  class="submitiative selectpicker">
             <option value="0">Родительская категория</option>
             <?php
             for ($categories->first(); $categories->current(); $categories->next()) {
@@ -56,7 +57,8 @@ $this->registerJsFile('/bootstrap-select/js/bootstrap-select.min.js', ['position
             }
         ?>
 
-            <tr>
+            <tr draggable="true" data-id="<?= $categories->category_id ?>" data-no="<?= $categories->no ?>"
+                data-action="/admin/category/move?categoryId=<?= $categories->category_id ?>">
                 <td class="col-sm-2">
                     <input type="checkbox" class="categoryCheck" name="categoryIds[]" value="<?= $categories->category_id ?>" />
                 </td>

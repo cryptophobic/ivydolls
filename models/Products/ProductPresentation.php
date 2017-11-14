@@ -93,7 +93,7 @@ class ProductPresentation
         {
             if(!empty($this->_productId)) {
                 $doll = new Products();
-                $doll->loadSpecs()->loadOptions()->loadBrandInfo()->loadCategoryInfo()->loadImages()->loadRelated();
+                $doll->loadSpecs()->loadOptions()->loadBrandInfo()->loadCategoryInfo()->loadImages()->loadRelated(true, true);
                 $this->_product = $doll->getItemsByIds(['product_id' => $this->_productId]);
             } else {
                 $this->_product = new ProductsPack();

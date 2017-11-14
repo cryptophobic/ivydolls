@@ -76,8 +76,7 @@ abstract class Collection
 
         $query = $this->getModel()->orderBy($query);
 
-        $query
-            ->offset($this->_offset)
+        $query->offset($this->_offset)
             ->limit($this->_limit);
 
 

@@ -61,12 +61,19 @@ $(document).ready(function(){
             form.attr('action', action);
         }
 
+        let method = button.data('method');
+        if (method !== undefined)
+        {
+            form.attr('method', method);
+        }
+
         if (typeof CKEDITOR !== 'undefined') {
             let description = $('#inputDescription');
             description.val(CKEDITOR.instances.inputDescription.getData());
         }
         return form;
     }
+
 
     $(".submitiative").change(function() {
         let form =  prepareSubmit(this);

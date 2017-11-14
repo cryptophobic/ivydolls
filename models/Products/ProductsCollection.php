@@ -67,11 +67,11 @@ class ProductsCollection extends Collection
     {
         return [
             static::HEIGHT_80CM => "80 см",
-            static::HEIGHT_GRACE => "Grace (69~75 см)",
-            static::HEIGHT_ELEGANT => "Elegant (63~68 см)",
-            static::HEIGHT_BLOOM => "Bloom (58~62 см)",
-            static::HEIGHT_BUD => "Bud (42~45 см)",
-            static::HEIGHT_NAVIETE => "Naivete (26~27 см)",
+            static::HEIGHT_GRACE => "69~75 см",
+            static::HEIGHT_ELEGANT => "63~68 см",
+            static::HEIGHT_BLOOM => "58~62 см",
+            static::HEIGHT_BUD => "42~45 см",
+            static::HEIGHT_NAVIETE => "26~27 см",
             static::UNCATEGORIZED => "Без размера",
             //static::PETS => "Питомцы"
         ];
@@ -161,6 +161,17 @@ class ProductsCollection extends Collection
         $query->andWhere('p.active = 1');
         return $query;
     }
+
+    public function getCount()
+    {
+        $query = new Query();
+        $query->select("count(*)")->from("products p");
+        $query = $this->_applyFilters($query);
+        $command = $query->createCommand(ObjFactory::dbConnection());
+
+        return $command->queryScalar();
+    }
+
 
 
     /**

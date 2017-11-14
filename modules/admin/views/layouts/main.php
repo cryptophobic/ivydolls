@@ -5,6 +5,7 @@
 <?php
 $this->registerJsFile('/js/jquery-3.2.0.min.js',['position' => static::POS_HEAD]);
 $this->registerJsFile('/js/admin/common.js',['position' => static::POS_HEAD]);
+$this->registerCssFile('/css/admin/site.css',['position' => static::POS_HEAD]);
 $this->registerCssFile('/bootstrap/css/bootstrap.min.css',['position' => static::POS_HEAD]);
 $this->registerCssFile('/bootstrap/css/bootstrap-theme.min.css',['position' => static::POS_HEAD]);
 $this->registerCssFile('/css/font-awesome-4.7.0/css/font-awesome.min.css',['position' => static::POS_HEAD]);
@@ -22,6 +23,7 @@ $this->registerJsFile('/bootstrap/js/bootstrap.min.js',['position' => static::PO
 
 <body>
 <?php $this->beginBody() ?>
+<div id="overlay"></div>
 <div class="container-fluid">
 
     <nav class="navbar navbar-default">

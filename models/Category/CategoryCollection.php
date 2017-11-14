@@ -15,6 +15,10 @@ class CategoryCollection extends Collection
 
     private $_parentCategoryIds = [0];
 
+    private $_minNo = 0;
+
+    private $_maxNo = 0;
+
     public function getModel()
     {
         if ($this->_model == null)
@@ -41,6 +45,24 @@ class CategoryCollection extends Collection
     }
 
     /**
+     * @param $min
+     * @param $max
+     * @return $this
+     */
+    public function setNoRange($min, $max)
+    {
+        if ($min > $max)
+        {
+            $swap = $min;
+            $min = $max;
+            $max = $swap;
+        }
+        $this->_minNo = $min;
+        $this->_maxNo = $max;
+        return $this;
+    }
+
+    /**
      * @param Query $query
      * @return mixed
      */
@@ -49,6 +71,12 @@ class CategoryCollection extends Collection
         if (!empty($this->_parentCategoryIds))
         {
             $query->andWhere(['IN', 'parent_category_id', $this->_parentCategoryIds]);
+        }
+
+        if (!empty($this->_maxNo) && !empty($this->_minNo))
+        {
+            $query->andWhere('no >= :minNo', [':minNo' => $this->_minNo]);
+            $query->andWhere('no <= :maxNo', [':maxNo' => $this->_maxNo]);
         }
 
         if ($this->_keyword)

@@ -2,27 +2,50 @@
 
 namespace app\controllers;
 
+use app\models\Category\Categories;
 use app\models\Category\CategoryCollection;
 use app\models\ObjFactory;
 use app\models\Products\Products;
 use app\models\Products\ProductsCollection;
+use app\models\Products\ProductsSearch;
 use Yii;
 
 class StartController extends FOController
 {
-    public function actionIndex($scrollUrl = '')
+
+    private function _getProductPack($array)
     {
+        $productsSearch = new ProductsSearch();
+        $productsSearch->_categoryId = empty($array['categoryId'])?"112":$array['categoryId'];
+        $productsSearch->_height = empty($array['height'])?"0":$array['height'];
+        $productsSearch->_offset = empty($array['offset'])?"0":$array['offset'];
+        $productsSearch->_brandIds = empty($array['brandId'])?"0":$array['brandId'];
+        $productsSearch->_keyword = empty($array['keyword'])?"":$array['keyword'];
+        $productsSearch->_productIds = empty($array['productIds'])?[]:explode(",", $array['productIds']);
+        return $productsSearch;
+    }
+
+    public function actionIndex()
+    {
+        $categoryId = empty($_REQUEST['categoryId'])?"112":$_REQUEST['categoryId'];
+
+        $category = new Categories();
+        $categoryPack = $category->getItemsByIds(['category_id' => [$categoryId]]);
+
         $categoriesCollection = new CategoryCollection();
         $categoriesCollection->setParentCategoryIds(-1);
         $categoriesCollection->getModel()->loadCategoryHierarchy();
         $categories = $categoriesCollection->getAll();
 
-        $scrollUrl = str_replace('offset', '', $scrollUrl);
+        $productsSearch = $this->_getProductPack($_REQUEST);
 
         return $this->render('index',
             [
+                'category' => $categoryPack,
                 'categories' => $categories,
-                'scrollUrl' => $scrollUrl
+                //'count' => $productsSearch->getCount(),
+                'productsSearch' => $productsSearch,
+                'content' => $this->renderEmpty('indexAjax', ['items' => $productsSearch->getProducts()])
             ]
         );
     }
@@ -35,45 +58,17 @@ class StartController extends FOController
         return json_encode(['body' => $this->render('suggest', ['products' => $dolls])]);
     }
 
-    public function actionLoadProducts($categoryId = 112, $height = 0, $offset = 0, $keyword = '', $productIds = "")
+    public function actionLoadProducts()
     {
         if (Yii::$app->request->isAjax) {
-            $scrollUrl = '';
-            if (!empty($productIds)) {
-                $products = new Products();
-                $productIds = explode(",", $productIds);
-                $dolls = $products->loadImages()->getItemsByIds(['product_id' => $productIds]);
-            } else {
-                $collection = new ProductsCollection();
 
-                if (!empty($categoryId)) {
-                    $collection->setCategoryId($categoryId);
-                }
-
-                if (!empty($height)) {
-                    $collection->setHeight($height);
-                }
-
-                if (!empty($keyword)) {
-                    $collection->setKeyWord($keyword);
-                }
-
-                $dolls = $collection->getItems($offset);
-                $newOffset = $collection->getOffset();
-
-                $scrollUrl = ObjFactory::urlManager()->createUrl([
-                    Yii::$app->controller->id . '/' . Yii::$app->controller->action->id,
-                    'categoryId' => $categoryId,
-                    'keyword' => $keyword,
-                    'height' => $height,
-                    'offset' => $newOffset]);
-            }
+            $productsSearch = $this->_getProductPack($_REQUEST);
             return json_encode([
-                'body' => $this->render('indexAjax', ['items' => $dolls]),
-                'scrollUrl' => $scrollUrl
+                'body' => $this->render('indexAjax', ['items' => $productsSearch->getProducts()]),
+                'scrollUrl' => $productsSearch->getScrollUrl(),
             ]);
         } else {
-            return $this->actionIndex(ObjFactory::request()->url);
+            return $this->actionIndex();
         }
     }
 

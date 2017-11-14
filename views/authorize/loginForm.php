@@ -9,18 +9,18 @@
         <label for="inputMessage">Пароль:</label>
         <input type="password" required="true" class="form-control" name="password" id="inputMessage">
     </div>
-    <div class="container-fluid">
-        <div class="col-sm-2">
+    <div class="row">
+        <div class="col-2">
             <button type="submit" id="login" name="login" value="1"
                     class="btn btn-primary">Войти
             </button>
         </div>
-        <div class="col-sm-4">
+        <div class="col-6">
             <button type="button" data-target="#myModal" data-content="/authorize/register-form"
                     class="modal-load btn btn-primary">Новый пользователь
             </button>
         </div>
-        <div class="col-sm-4">
+        <div class="col-4">
             <a href="#">Забыли пароль?</a>
         </div>
     </div>

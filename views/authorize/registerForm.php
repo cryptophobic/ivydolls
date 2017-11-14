@@ -21,8 +21,8 @@
         <label for="inputMessage">Подтвердить пароль:</label>
         <input type="password" required="true" class="form-control" name="confirm-password" id="inputConfirm">
     </div>
-    <div class="container-fluid">
-        <div class="col-sm-2">
+    <div class="row">
+        <div class="col">
             <button type="submit" id="login" name="login" value="1"
                     class="btn btn-primary">Зарегистрироваться
             </button>

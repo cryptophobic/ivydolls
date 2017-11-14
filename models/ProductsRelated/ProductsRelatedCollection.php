@@ -17,8 +17,11 @@ class ProductsRelatedCollection extends Collection
      */
     private $_productIds = [];
 
+    private $_filterZeroPrice = false;
+
     /**
      * @param array|int $productIds
+     * @return $this
      */
     public function setProductIds($productIds)
     {
@@ -27,6 +30,17 @@ class ProductsRelatedCollection extends Collection
             $productIds = [$productIds];
         }
         $this->_productIds = $productIds;
+        return $this;
+    }
+
+    /**
+     * @param bool $filter =true
+     * @return $this
+     */
+    public function setFilterZeroPrices($filter = true)
+    {
+        $this->_filterZeroPrice = (bool) $filter;
+        return $this;
     }
 
     /**
@@ -35,6 +49,11 @@ class ProductsRelatedCollection extends Collection
      */
     protected function _applyFilters($query)
     {
+        if ($this->_filterZeroPrice === true)
+        {
+            $query->andWhere('price > 0')->andWhere('price < 9999');
+        }
+
         if ($this->_productIds)
         {
             $query->andWhere(['IN', 'product_id', $this->_productIds]);

@@ -5,9 +5,7 @@
 let utils = new Utils();
 
 $(document).ready( function() {
-    $('.carousel').carousel({
-        interval: 1000 * 10
-    });
+
 
     $('.scroll-link').click(function(event)
     {
@@ -20,7 +18,15 @@ $(document).ready( function() {
     $(document).on('click', '.modal-load', function () {
         let action = $(this).data('content');
         utils.loadTo('.modal-body', action);
-    })
+    });
+
+    /*$(document).on('click', '.checkRow', function(event){
+        if (event.target.tagName.toLowerCase() !== 'a') {
+            let checkBoxes = $(this).find('input[type=checkbox]');
+            checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+        }
+    });*/
+
 });
 
 let scrollTo = function(hash)

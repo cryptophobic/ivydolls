@@ -32,7 +32,7 @@ class OptionsDelete extends ItemsDelete
         $ids = [];
         foreach ($this->_ids['option_id'] as $optionId)
         {
-            $result = $options->getItemsByIds($optionId);
+            $result = $options->getItemsByIds(['option_id' => $optionId]);
             if ($result->moveToItem($optionId) && $result->options_restricted_values != null)
             {
                 $restrictedIds = $result->options_restricted_values->getKeysArray();

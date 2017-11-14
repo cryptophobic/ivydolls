@@ -9,6 +9,7 @@
   "author": "dima",
   "license": "ISC",
   "dependencies": {
+    "popper.js": "^1.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },

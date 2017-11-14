@@ -12,7 +12,7 @@ items = {
         }
         url += prefix + 'rand='+Math.random();
         let manUrl = '/start?scrollUrl='+encodeURIComponent(url);
-        window.history.pushState(null, null, manUrl);
+        //window.history.pushState(null, null, manUrl);
         return url;
     },
     load: function(url) {
@@ -56,20 +56,6 @@ items = {
 
 $(document).ready( function() {
 
-    $('.carousel-inner .item').click(function () {
-        let obj = $(this);
-        let img = obj.children('img');
-        let url = '';
-        if (url = img.data('load'))
-        {
-            items.load(url);
-            scrollTo('#assortment');
-        } if (url = img.data('href'))
-        {
-            window.location.href = url;
-        }
-    })
-
     if ($('#content-container').children().length === 0) {
         let scrollEl = $('input[name="scrollUrl"]');
         let url = scrollEl.attr('value');
@@ -99,6 +85,7 @@ $(document).ready( function() {
                     let scrollEl = $('input[name="scrollUrl"]');
                     let url = scrollEl.attr('value');
                     if (url) {
+                        $('input[name="scrollUrl"]').attr('value', '');
                         items.append(url);
                     }
                 }

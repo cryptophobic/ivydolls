@@ -260,7 +260,7 @@ class DollsController extends AdminController
         $categories = new Categories();
 
         return $this->render('doll', [
-            'categories' => $categories->getItemsByIds($categoryId),
+            'categories' => $categories->getItemsByIds(['category_id' => [$categoryId]]),
             'productPresentation' => new ProductPresentation(0, $categoryId)
         ]);
     }

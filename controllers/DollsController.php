@@ -8,7 +8,7 @@ use app\models\Products\Products;
 class DollsController extends FOController
 {
     /**
-     * @param $dollName
+     * @param $productId
      * @return string
      */
     public function actionIndex($productId)

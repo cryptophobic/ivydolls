@@ -8,9 +8,11 @@ use app\models\Products\ProductsPack;
 for ($items->first();$items->current();$items->next())
 {
     ?>
-    <div class="col-sm-3">
+    <div class="col-md-3">
         <div class="thumbnail">
-            <a href="/dolls/?productId=<?= $items->product_id ?>"><img id="<?= $items->product_id ?>image" data-id="<?= $items->product_id ?>" class="img-responsive" src="<?= $items->products_images->first() == true?$items->products_images->image_low:''; ?>" alt="<?= $items->name ?>"/>
+            <a href="/dolls/?productId=<?= $items->product_id ?>">
+                <img class="img-fluid" id="<?= $items->product_id ?>image" data-id="<?= $items->product_id ?>" class="img-responsive" src="<?= $items->products_images->first() == true?$items->products_images->image_low:''; ?>" alt="<?= $items->name ?>"/>
+            </a>
             <div class="caption">
                 <h4 id="<?= $items->product_id ?>name" data-id="<?= $items->product_id ?>"
                     class="group inner list-group-item-heading">
@@ -20,7 +22,7 @@ for ($items->first();$items->current();$items->next())
                 <table class="table productSummary">
                     <tbody>
                     <tr>
-                        <td align="right">$<?= $items->price ?></td>
+                        <td colspan="2" align="center">$<?= $items->price ?></td>
                     </tr>
                     <tr>
                         <td>

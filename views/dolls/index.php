@@ -11,85 +11,50 @@ use app\widgets;
 $product = $productPresentation->getProduct();
 $specs = $productPresentation->getSpecs();
 $options = $productPresentation->getOptions();
-$relatedCategories = $productPresentation->getRelatedCategories();
 $brands = $productPresentation->getBrands();
 
 $this->title = yii::$app->params['company'] . ' ' . $product->brands->name . ' ' . $product->name;
 
 $this->registerCssFile('/css/site.css');
 $this->registerCssFile('/css/dolls.css');
-$this->registerCssFile("/css/OwlCarousel/owl.carousel.min.css");
-$this->registerCssFile("/css/OwlCarousel/owl.theme.default.min.css");
-$this->registerJsFile('/js/OwlCarousel/owl.carousel.min.js');
 $this->registerJsFile('/js/dolls.js');
 $this->registerJsFile('/js/site.js');
+$this->registerCssFile('/fotorama-4.6.4/fotorama.css');
+$this->registerJsFile('/fotorama-4.6.4/fotorama.js');
+
 $this->registerJsFile('https://www.google.com/recaptcha/api.js');
-
-$this->registerCssFile('/lightbox2/dist/css/lightbox.min.css');
-$this->registerJsFile('/lightbox2/dist/js/lightbox.min.js');
-
-
-
 
 $active = 'active';
 
-
 ?>
 
-<div class="container" style="margin-top:55px">
+<div class="container">
     <div class="row">
-        <div class="col-sm-4 panel panel-default">
-            <div id="carousel" class="carousel" data-interval="false">
-                <div class="carousel-inner">
-                    <?php
-                    $productImages = $product->products_images;
-                    if ($productImages->first()) {
-
-                        for ($productImages->first(); $productImages->current(); $productImages->next()) {
-                            ?>
-                            <div class="item <?= $active ?>">
-                                <a href="<?= $productImages->image_high ?>" data-lightbox="image-<?= $product->product_id ?>" data-title="<?= $product->name ?>">
-                                <img id="<?= $productImages->products_image_id ?>image"
-                                     data-id="<?= $productImages->products_image_id ?>"
-                                     src="<?= $productImages->image_low ?>" alt="<?= $product->name ?>"/>
-                                </a>
-                            </div>
-                            <?php
-                            $active = '';
-                        }
+        <div class="col-4 panel panel-default">
+            <div class="fotorama" data-allowfullscreen="true">
+                <?php
+                $productImages = $product->products_images;
+                if ($productImages->first()) {
+                    for ($productImages->first(); $productImages->current(); $productImages->next()) {
+                        ?>
+                <a href="<?= $productImages->image_high ?>" data-lightbox="image-<?= $product->product_id ?>" data-title="<?= $product->name ?>">
+                    <img id="<?= $productImages->products_image_id ?>image"
+                         data-id="<?= $productImages->products_image_id ?>"
+                         src="<?= $productImages->image_low ?>" alt="<?= $product->name ?>"/>
+                </a>
+                        <?php
                     }
-                    ?>
-                </div>
-            </div>
-            <div class="row owl-carousel-container">
-                <a href="#" class="prev fa fa-chevron-left" aria-hidden="true"></a>
-                <a href="#" class="next fa fa-chevron-right" aria-hidden="true"></a>
-
-                <div class="owl-carousel col-sm-12" data-items="5">
-                    <?php
-                    if ($productImages->first()) {
-                        $index = 0;
-                        for ($productImages->first(); $productImages->current(); $productImages->next()) {
-                            ?>
-                            <div style="padding: 10px;" data-target="#carousel" data-slide-to="<?= $index++ ?>">
-                                <img data-id="<?= $productImages->products_image_id ?>"
-                                     src="<?= $productImages->image_thumb ?>"
-                                     alt="<?= $product->name ?>"/>
-                            </div>
-                            <?php
-                        }
-                    }
-                    ?>
-                </div>
+                }
+                ?>
             </div>
         </div> <!-- /col-sm-6 -->
-        <div class="col-sm-8">
+        <div class="col-8">
             <input type="hidden" name="initialPrice" value="<?= $product->price ?>">
             <input type="hidden" name="calculatedPrice" value="<?= $product->price ?>">
             <h1 id="60name" class="group inner list-group-item-heading">
                 <?= $product->categories->name.": " ?> <?= $product->brands->name ?> <?= $product->name ?> <!--(<?= $product->part_number ?>) -->
             </h1>
-            <table class="table productSummary">
+            <table class="table productSummary table-sm">
                 <thead>
                 <tr>
                     <th>Цена</th>
@@ -137,7 +102,6 @@ $active = 'active';
                                             'options_restricted_values_id' => $restrictedValues->options_restricted_values_id
                                         ]);
                                         if ($moved) {
-                                            var_dump($productsOptions->toArray(), $restrictedValues->options_restricted_values_id);
                                             ?>
                                             <option data-price="<?= $productsOptions->price ?>" value="<?= $restrictedValues->options_restricted_values_id ?>">
                                                 <?= $restrictedValues->value ?> (<?= $productsOptions->price ?> )
@@ -170,68 +134,31 @@ $active = 'active';
                 </tr>-->
                 </tbody>
             </table>
-            <?php
-            $related = $product->products_related;
-            $i = 0;
-            foreach ($relatedCategories as $categoryId => $relatedCategory) {
-                /** @var CategoryPack $category */
-                $category = $relatedCategory['category'];
-                /** @var array $relatedKeys */
-                $relatedKeys = $relatedCategory['relatedKeys'];
-                ?>
-                <div id="menu<?= $category->category_id ?>" >
-                    <label for="inputRelatedCat<?= $category->category_id ?>"><?= $category->name ?></label>
-                    <table id="inputRelatedCat<?= $category->category_id ?>" class="table" >
-                        <tbody>
-                        <?php
-                        foreach ($relatedKeys as $keys) {
-                            $i++;
-                            $related->moveToItem($keys);
-                            ?>
-                            <tr>
-                                <td class="col-sm-2">
-                                    <input data-price="<?= $related->price ?>" class="priceCollector checkRelated<?= $category->category_id ?>" type="checkbox"
-                                           name="relatedDelete[]"
-                                           value="<?= $related->product_related_id ?>">
-                                </td>
-                                <td class="col-sm-4">
-                                    <a href="/dolls/?productId=<?= urlencode($related->products->product_id) ?>">
-                                        <img  src="<?= $related->products->products_images->image_thumb ?>">
-                                    </a>
-                                </td>
 
-                                <td class="col-sm-3">
-                                    <span><a href="/dolls/?productId=<?= urlencode($related->products->product_id) ?>"><?= $related->products->name ?></a></span>
-                                </td>
-                                <td class="text-right col-sm-3">
-                                    <span><?= $related->price ?></span>
-                                </td>
-                            </tr>
-
-                            <?php
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-                <?php
-            }
-            ?>
         </div>
     </div>
-    <div class="row">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Описание</a></li>
-            <li><a data-toggle="tab" id="feedbackAnchor" name="feedbackAnchor" href="#menuFeedback">Задать вопрос</a></li>
-        </ul>
 
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
+
+    <div class="row">
+        <ul class="nav nav-tabs container-fluid" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#relatedTab">Опции и аксессуары</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#descriptionTab">Описание</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" id="feedbackAnchor" name="feedbackAnchor" href="#feedBackTab">Задать вопрос</a></li>
+        </ul>
+    </div>
+
+    <div class="row tab-content">
+        <div id="relatedTab" class="tab-pane active  container-fluid">
+            <?= widgets\ProductRelatedWidget::widget(['productPresentation' => $productPresentation]) ?>
+        </div>
+
+
+        <div id="descriptionTab" class="tab-pane container-fluid">
                 <h3>Описание</h3>
                 <?= $product->description ?>
-            </div>
-            <div id="menuFeedback" class="tab-pane fade">
-                <h3>Задать вопрос</h3>
+        </div>
+        <div id="feedBackTab" class="tab-pane container-fluid">
+            <h3>Задать вопрос</h3>
                 <form class="ajaxForm" action="/feedback" method="POST">
                     <h4 class="caption text-danger warnMessage"></h4>
                     <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>"/>
@@ -260,8 +187,7 @@ $active = 'active';
 
             </div>
         </div>
-
     </div>
 </div>
 
-<?= widgets\CartModalWidget::widget() ?>
+<?= "";/*widgets\CartModalWidget::widget()*/ ?>

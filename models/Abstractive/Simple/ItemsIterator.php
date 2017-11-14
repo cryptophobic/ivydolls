@@ -78,6 +78,15 @@ abstract class ItemsIterator
         }
     }
 
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->_items);
+    }
+
+
     public function filter($key, $value)
     {
         $keyString = $this->_getKeyByArray([$key, $value]);

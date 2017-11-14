@@ -22,6 +22,7 @@ use app\models\Specs\SpecsPack;
  * @property integer parent_category_id
  * @property integer category_id
  * @property integer active
+ * @property integer no
  * @property CategoryPack $categories
  * @property OptionsPack options
  * @property SpecsPack specs
@@ -67,7 +68,8 @@ class CategoryPack extends ItemsPack
         'image' => null,
         'image_thumb' => null,
         'parent_category_id' => 0,
-        'active' => 1
+        'active' => 1,
+        'no' => 0
     ];
 
     protected $_references = [

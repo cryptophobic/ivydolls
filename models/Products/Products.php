@@ -31,12 +31,13 @@ use yii\db\Query;
  * @method $this loadOptions (bool $set = true)
  * @method $this loadBrandInfo (bool $set = true)
  * @method $this loadCategoryInfo (bool $set = true)
- * @method $this loadRelated (bool $set = true)
  * @method ProductsPack getItemsByIds  ($ids)
  * @var ProductsPack _items
  */
 class Products extends ModelAccessor
 {
+    private $_filterRelatedZeroPrices = false;
+
     protected $_options = [
         '_loadImages' => false,
         '_loadSpecs' => false,
@@ -45,6 +46,14 @@ class Products extends ModelAccessor
         '_loadCategoryInfo' => false,
         '_loadRelated' => false
     ];
+
+
+    public function loadRelated($set = true, $filterZeroPrices = false)
+    {
+        $this->_options['_loadRelated'] = $set;
+        $this->_filterRelatedZeroPrices = $filterZeroPrices;
+        return $this;
+    }
 
     /**
      * @var ProductsPack
@@ -166,6 +175,10 @@ class Products extends ModelAccessor
             $relatedCollection = new ProductsRelatedCollection();
             $relatedCollection->getModel()->loadProductInfo();
             $relatedCollection->setProductIds($this->_ids['product_id']);
+            if ($this->_filterRelatedZeroPrices)
+            {
+                $relatedCollection->setFilterZeroPrices();
+            }
             $this->_items->mergeDataPack($relatedCollection->getAll(), ProductsRelatedPack::getTableName());
             return true;
         } else {

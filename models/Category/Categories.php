@@ -12,6 +12,7 @@ use app\models\Options\OptionsCollection;
 use app\models\Options\OptionsPack;
 use app\models\Specs\SpecsCollection;
 use app\models\Specs\SpecsPack;
+use yii\db\Query;
 
 /**
  * @method $this loadSpecs (bool $set = true)
@@ -47,6 +48,17 @@ class Categories extends ModelAccessor
     }
 
     /**
+     * @param Query $query
+     * @return Query
+     */
+    public function orderBy($query)
+    {
+        $query->orderBy("`no` > 0 desc, no asc");
+        return $query;
+    }
+
+
+    /**
      * Load general info
      *
      * @return bool
@@ -64,6 +76,7 @@ class Categories extends ModelAccessor
     /**
      * @param CategoryPack $categoryPack
      * @param array $categories
+     * @return CategoryPack
      */
     private function _mergeCategories($categoryPack, $categories)
     {

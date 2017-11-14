@@ -44,12 +44,41 @@ class CategoryController extends AdminController
 
     }
 
+    /**
+     * @param $categoryId
+     * @param $no
+     */
+    public function actionMove($categoryId, $no)
+    {
+        $categories = new Categories();
+        $categoryPack = $categories->getItemsByIds(['category_id' => $categoryId]);
+        $currentNo = $categoryPack->no;
+        $categoryCollection = new CategoryCollection();
+        $categoryCollection->setParentCategoryIds(-1);
+        $categoryCollection->setNoRange($no, $currentNo);
+        $start = $no > $currentNo ? $currentNo : $no + 1;
+        $categoriesPack = $categoryCollection->getAll();
+
+        for($categoriesPack->first();$categoriesPack->current();$categoriesPack->next())
+        {
+            if($categoriesPack->category_id == $categoryId)
+            {
+                $categoriesPack->no = $no;
+            } else {
+                $categoriesPack->no = $start;
+            }
+            $start ++;
+        }
+        $categoriesPack->flush();
+        return json_encode(['result' => 'ok']);
+    }
+
     public function actionCategory($categoryId = 0, $parentCategoryId = 0)
     {
         if (!empty($categoryId))
         {
             $category = new Categories();
-            $items = $category->getItemsByIds($categoryId);
+            $items = $category->getItemsByIds(['category_id' => $categoryId]);
             $items->moveToItem($categoryId);
             $category = $items;
         } else {

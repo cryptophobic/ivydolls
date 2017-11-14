@@ -71,6 +71,17 @@ abstract class Collection extends \app\models\Abstractive\Simple\Collection
         return $result;
     }
 
+    public function getCount()
+    {
+        $query = new Query();
+        $query->select("count(*)")->from($this->getTableName());
+        $query = $this->_applyFilters($query);
+        $query = $this->getModel()->orderBy($query);
+        $command = $query->createCommand(ObjFactory::dbConnection());
+
+        return $command->queryScalar();
+    }
+
     /**
      * @return ItemsPack
      */
